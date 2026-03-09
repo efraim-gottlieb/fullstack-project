@@ -5,7 +5,7 @@ import { auth } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 router.route("/login")
-  .post(auth, authControllers.login)
+  .post(authControllers.login)
 
 
 export default router;
