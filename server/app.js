@@ -1,12 +1,16 @@
 import express from "express";
-import complaintsRoutes from "./routes/complaintsRoutes.js";
 import cors from "cors";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
+import authRoutes from "./routes/auth.routes.js";
+import reportsRoutes from "./routes/reports.routes.js";
+import adminRoutes from "./routes/admin.routes.js";
 
+dotenv.config();
 
 const app = express();
-const port = process.env.port || 8000;
+const port = process.env.PORT || 6000;
 
 app.use(cors());
 app.use(express.json());
@@ -16,7 +20,9 @@ app.get("/", (req, res) => {
   console.log("pinging root");
 });
 
-app.use("/complaints", complaintsRoutes);
+app.use("/auth", authRoutes);
+app.use("/reports", reportsRoutes);
+app.use("/admin", adminRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
@@ -26,17 +32,6 @@ app.use((err, req, res, next) => {
 function generateToken(payload) {
   return jwt.sign(payload, "secretKey", { expiresIn: "100h" });
 }
-
-app.post("/api/admin/login", (req, res) => {
-  const pass = "1234";
-  const { password } = req.body;
-  if (pass == password) {
-    res.send(generateToken({ pass }));
-  } else {
-    res.status(403).end("Unauthorized");
-  }
-});
-
 
 
 
