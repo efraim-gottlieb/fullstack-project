@@ -6,6 +6,8 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth.routes.js";
 import reportsRoutes from "./routes/reports.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
+import { createNewUser } from "./controllers/admin.controller.js";
+import { createUser } from "./services/auth.service.js";
 
 dotenv.config();
 
@@ -32,8 +34,6 @@ app.use((err, req, res, next) => {
 function generateToken(payload) {
   return jwt.sign(payload, "secretKey", { expiresIn: "100h" });
 }
-
-
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

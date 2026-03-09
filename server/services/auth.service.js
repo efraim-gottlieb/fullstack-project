@@ -8,7 +8,9 @@ export async function getUsers() {
   return users;
 }
 
-export async function createUser(id, agentCode, fullName, role) {
+export async function createUser(agentCode, fullName, role) {
+  const users = await getUsers();
+  const id = Object.keys(users).length + 1;
   const user = {
     id,
     agentCode,
@@ -18,6 +20,6 @@ export async function createUser(id, agentCode, fullName, role) {
   };
   const conn = await getMongoDbConnection();
   const collection = conn.collection("users");
-  const newUser = await collection.insertOne({user})
-  return newUser
+  const newUser = await collection.insertOne({ user });
+  return newUser;
 }

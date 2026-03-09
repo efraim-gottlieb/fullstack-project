@@ -7,5 +7,7 @@ const router = express.Router();
 router.route("/login")
   .post(authControllers.login)
 
+router.route("/me").get(auth, authControllers.profile)
+
 
 export default router;
