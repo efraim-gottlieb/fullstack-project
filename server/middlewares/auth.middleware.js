@@ -12,6 +12,6 @@ export async function auth(req, res, next) {
         res.status(403).end('Unauthorized')
     }
 }
-export async function admin(req, res, next) {
+export async function isAdmin(req, res, next) {
     req.user.role == "admin" ? next(): res.status(403).end('Unauthorized')
 }

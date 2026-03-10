@@ -7,18 +7,25 @@ export async function getReports() {
   return reports;
 }
 
-export async function createReport(agentCode, fullName, role) {
-  const users = await getReports();
-  const id = Object.keys(users).length + 1;
+export async function createReport(
+  userId,
+  category,
+  urgency,
+  message,
+  image = null,
+) {
+  const reports = await getReports();
+  const id = Object.keys(reports).length + 1;
   const report = {
     id,
-    agentCode,
-    fullName,
-    role,
-    password: atbashCipher(fullName),
+    userId,
+    category,
+    urgency,
+    message,
+    image,
   };
   const conn = await getMongoDbConnection();
-  const collection = conn.collection("users");
-  const newUser = await collection.insertOne(report);
-  return newUser;
+  const collection = conn.collection("reports");
+  const newReport = await collection.insertOne(report);
+  return newReport;
 }

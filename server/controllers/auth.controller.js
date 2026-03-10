@@ -21,7 +21,7 @@ export async function profile(req, res) {
     const user = verifyToken(token);
     if (!user) res.status(403).end("Unauthorized");
     const { id, agentCode, role } = user;
-    res.send({ user: { id, agentCode, role } });
+    res.send({ id, agentCode, role });
   } catch {
     res.status(403).end("Unauthorized");
   }
