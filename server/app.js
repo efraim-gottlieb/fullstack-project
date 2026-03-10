@@ -15,6 +15,9 @@ const port = process.env.PORT || 6000;
 
 app.use(cors());
 app.use(express.json());
+const upload = multer({
+  storage: multer.memoryStorage(),
+});
 
 // app.get("/d", async (req, res) => {
 //   createUser("EG123", "Sari", "user");
@@ -26,11 +29,6 @@ app.get("/", (req, res) => {
   console.log("pinging root");
 });
 
-const upload = multer({
-  dest: "uploads/",
-});
-
-
 app.use("/auth", authRoutes);
 app.use("/reports", reportsRoutes);
 app.use("/admin", adminRoutes);
@@ -39,7 +37,6 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
 });
-
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

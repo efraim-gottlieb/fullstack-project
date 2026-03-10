@@ -13,6 +13,7 @@ export async function createReport(
   urgency,
   message,
   image = null,
+  extraFields = {},
 ) {
   const reports = await getReports();
   const id = Object.keys(reports).length + 1;
@@ -23,6 +24,7 @@ export async function createReport(
     urgency,
     message,
     image,
+    ...extraFields,
   };
   const conn = await getMongoDbConnection();
   const collection = conn.collection("reports");
