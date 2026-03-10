@@ -20,6 +20,6 @@ export async function createUser(agentCode, fullName, role) {
   };
   const conn = await getMongoDbConnection();
   const collection = conn.collection("users");
-  const newUser = await collection.insertOne({ user });
+  const newUser = await collection.insertOne(user);
   return newUser;
 }

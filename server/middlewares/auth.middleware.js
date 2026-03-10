@@ -13,5 +13,5 @@ export async function auth(req, res, next) {
     }
 }
 export async function admin(req, res, next) {
-    req.user.user.role == "admin" ? next(): res.status(403).end('Unauthorized')
+    req.user.role == "admin" ? next(): res.status(403).end('Unauthorized')
 }

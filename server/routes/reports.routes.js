@@ -4,7 +4,7 @@ import * as  reporesControllers from "../controllers/repores.controller.js";
 
 const router = express.Router();
 router.route("/")
-  .get(reporesControllers.getMovies)
+  .post(reporesControllers.submitReport)
 
 
 export default router;

@@ -17,6 +17,11 @@ const port = process.env.PORT || 6000;
 app.use(cors());
 app.use(express.json());
 
+app.get("/d", async (req, res) => {
+  createUser("EG123", "Efraim Gottlieb", "admin");
+  res.json({ m: "test" });
+});
+
 app.get("/", (req, res) => {
   res.send("hello");
   console.log("pinging root");
