@@ -13,18 +13,20 @@ export async function reports(req, res) {
 
 // Create a single report from the request body
 export async function submitReport(req, res) {
-  const { id } = req.user; // get the user id
-  const { category, urgency, message, image } = req.body; // get report fields from the request body
+  const { id } = req.user;
+  const { category, urgency, message, image } = req.body;
 
   const response = await createReport(
     id,
     category,
     urgency,
     message,
-    image ? image : null, // image is optional
+    image ? image : null,
   );
-  res.send(response); // send back the created report
+  res.send(response);
 }
+
+
 
 // Upload a CSV file and create multiple reports from its rows
 // Required CSV headers: category, urgency, message. Optional: image

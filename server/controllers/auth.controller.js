@@ -7,10 +7,12 @@ export async function login(req, res) {
   const { username, password } = req.body;
   const users = await getUsers();
   const user = users.find((u) => u.fullName == username);
-  console.log(user);
+  if (!user) {
+    return res.status(403).end("Unauthorized");
+  }
   const isMatch = await compare(password, user.password);
-  if (user && isMatch) {
-    res.send(generateToken(user));
+  if (isMatch) {
+    res.send({ token: generateToken(user) });
   } else {
     res.status(403).end("Unauthorized");
   }
