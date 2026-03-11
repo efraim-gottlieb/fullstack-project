@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/d", async (req, res) => {
-  const a = await createUser("efi", "efraim", "admin");
+  const a = await createUser("miri", "miri", "admin");
   res.send(a);
 });
 

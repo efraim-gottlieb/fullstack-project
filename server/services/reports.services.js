@@ -1,9 +1,10 @@
 import { getMongoDbConnection } from "../db/mongo.js";
 
-export async function getReports() {
+export async function getReports(userId = null) {
   const conn = await getMongoDbConnection();
   const collection = conn.collection("reports");
-  const reports = await collection.find().toArray();
+  const filter = userId ? { userId } : {};
+  const reports = await collection.find(filter).toArray();
   return reports;
 }
 
