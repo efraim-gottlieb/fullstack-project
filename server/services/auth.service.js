@@ -1,5 +1,6 @@
 import { getMongoDbConnection } from "../db/mongo.js";
 import { atbashCipher } from "../utils/atbashChiper.js";
+import { encrypt } from "../utils/hash.js";
 
 export async function getUsers() {
   const conn = await getMongoDbConnection();
@@ -16,10 +17,10 @@ export async function createUser(agentCode, fullName, role) {
     agentCode,
     fullName,
     role,
-    password: atbashCipher(fullName),
+    password: await encrypt(atbashCipher(fullName)),
   };
   const conn = await getMongoDbConnection();
   const collection = conn.collection("users");
   const newUser = await collection.insertOne(user);
-  return newUser;
+  return { newUser, defaultePassword: atbashCipher(fullName) };
 }

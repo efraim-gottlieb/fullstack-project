@@ -16,7 +16,7 @@ export async function submitReport(req, res) {
   const { id } = req.user; // get the user id
   const { category, urgency, message, image } = req.body; // get report fields from the request body
 
-  const response = await createReport( // save the report to the database
+  const response = await createReport(
     id,
     category,
     urgency,

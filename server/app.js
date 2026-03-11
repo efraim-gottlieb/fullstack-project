@@ -1,11 +1,11 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import multer from "multer";
 
 import authRoutes from "./routes/auth.routes.js";
 import reportsRoutes from "./routes/reports.routes.js";
 import adminRoutes from "./routes/admin.routes.js";
+
 import { createUser } from "./services/auth.service.js";
 
 dotenv.config();
@@ -15,14 +15,11 @@ const port = process.env.PORT || 6000;
 
 app.use(cors());
 app.use(express.json());
-const upload = multer({
-  storage: multer.memoryStorage(),
-});
 
-// app.get("/d", async (req, res) => {
-//   createUser("EG123", "Sari", "user");
-//   res.json({ m: "test" });
-// });
+app.get("/d", async (req, res) => {
+  const a = await createUser("efi", "efraim", "admin");
+  res.send(a);
+});
 
 app.get("/", (req, res) => {
   res.send("hello");
