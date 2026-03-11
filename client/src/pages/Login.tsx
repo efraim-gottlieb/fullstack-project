@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import "./login.css"
+import "./login.css";
+
 type LoginInput = {
   name: string;
   password: string;
 };
 
 const Login = () => {
-  const navigate: any = useNavigate()
+  const navigate: any = useNavigate();
   const [loginInput, setLoginInput] = useState<LoginInput>({
     name: "",
     password: "",
@@ -34,32 +35,37 @@ const Login = () => {
     }
     const data = await response.json();
     localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify({ name: loginInput.name, role: data.role, agentCode: data.agentCode }));
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        name: loginInput.name,
+        role: data.role,
+        agentCode: data.agentCode,
+      }),
+    );
     navigate("/");
   }
   return (
     <div>
-
-        <div className="login-form">
-          <label htmlFor="name">Agent Code</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={loginInput.name}
-            onChange={handleChange}
-          />
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={loginInput.password}
-            onChange={handleChange}
-          />
+      <div className="login-form">
+        <label htmlFor="name">Agent Code</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={loginInput.name}
+          onChange={handleChange}
+        />
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={loginInput.password}
+          onChange={handleChange}
+        />
         <button onClick={login}>Login</button>
-        </div>
-
+      </div>
     </div>
   );
 };

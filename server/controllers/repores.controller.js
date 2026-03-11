@@ -2,6 +2,7 @@ import { createReport, getReports } from "../services/reports.services.js"; // i
 
 // Get all reports (admin) or only the user's own reports
 export async function reports(req, res) {
+  console.log('object')
   const { role, id } = req.user; // extract role and id from the logged-in user
   const reportsData = await getReports(); // fetch all reports from the database
   if (role == "admin") {
