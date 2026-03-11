@@ -1,21 +1,15 @@
-import { BrowserRouter, Link, Route, Routes } from 'react-router'
+import { BrowserRouter, Route, Routes } from 'react-router'
 import './App.css'
 
+import Home from './pages/Home'
 import Login from './pages/Login'
 function App() {
   return (
  <BrowserRouter>
-      {/* Navigation */}
-      <nav>
-        <h1>Agents Reports System</h1>
-        <Link to="/">Home</Link>
-      </nav>
-
       {/* Routes */}
       <Routes>
-        <Route path="/" element={<Login />} />
-        {/* <Route path="/movie/:id" element={<Details />} />
-        <Route path="/movie/seats/:id" element={<Seats />} /> */}
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   )

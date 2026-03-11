@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
 import "./login.css"
 type LoginInput = {
   name: string;
@@ -6,6 +7,7 @@ type LoginInput = {
 };
 
 const Login = () => {
+  const navigate: any = useNavigate()
   const [loginInput, setLoginInput] = useState<LoginInput>({
     name: "",
     password: "",
@@ -26,8 +28,14 @@ const Login = () => {
         password: loginInput.password,
       }),
     });
+    if (!response.ok) {
+      alert("Login failed");
+      return;
+    }
     const data = await response.json();
     localStorage.setItem("token", data.token);
+    localStorage.setItem("user", JSON.stringify({ name: loginInput.name, role: data.role, agentCode: data.agentCode }));
+    navigate("/");
   }
   return (
     <div>

@@ -12,7 +12,7 @@ export async function login(req, res) {
   }
   const isMatch = await compare(password, user.password);
   if (isMatch) {
-    res.send({ token: generateToken(user) });
+    res.send({ token: generateToken(user) , role: user.role, agentCode: user.agentCode });
   } else {
     res.status(403).end("Unauthorized");
   }
